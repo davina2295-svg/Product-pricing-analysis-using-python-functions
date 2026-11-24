@@ -1,94 +1,69 @@
-# DSWP-Experiment-1.A-Employee-Data-Display-Using-Python
+# DSWP-Experiment-1.B.-Product-pricing-analysis-using-python-functions
 
 ## Aim
-
-To collect employee details, validate inputs, and calculate gross and net salary using Python.
+To analyze quarterly product sales data across multiple products and quarters using 2D NumPy arrays and Python statistical functions.
 
 ## Algorithm
 
 1. **Start** the program.
-2. **Read Employee Details** from the user:
-   * Input `name` (String) for the employee's full name.
-   * Input `emp_id` (String) for the employee's identification number.
-   * Input `basic` (Float) for the employee's basic salary.
-3. **Validate Input**:
-   * Ensure `basic` is a valid numeric value and check if `basic < 0`. If invalid or negative, display an appropriate error message and terminate the program.
-4. **Compute Allowances**:
-   * Calculate House Rent Allowance: $\text{HRA} = 0.15 \times \text{basic}$.
-   * Calculate Dearness Allowance: $\text{DA} = 0.10 \times \text{basic}$.
-5. **Compute Gross Salary**:
-   * Calculate total earnings before deductions: $\text{Gross Salary} = \text{basic} + \text{HRA} + \text{DA}$.
-6. **Compute Tax Deduction**:
-   * Calculate income tax at $8\%$ of gross pay: $\text{Tax} = 0.08 \times \text{Gross Salary}$.
-7. **Compute Net Salary**:
-   * Calculate take-home pay: $\text{Net Salary} = \text{Gross Salary} - \text{Tax}$.
-8. **Display Formatted Payroll Report**:
-   * Print a structured summary displaying `name`, `emp_id`, `basic`, `HRA`, `DA`, `Gross Salary`, `Tax`, and `Net Salary` formatted to two decimal places.
-9. **Stop** the program.
-
+2. **Import Library**: Import the `numpy` module as `np` for numerical array operations.
+3. **Initialize 2D Sales Matrix**: Create a $3 \times 4$ NumPy array `sales` containing quarterly sales figures for 3 products across 4 quarters.
+4. **Compute Product-Wise Totals**: Calculate the sum of sales across columns (`axis=1`) for each product using `np.sum(sales, axis=1)`.
+5. **Compute Quarter-Wise Totals**: Calculate the sum of sales across rows (`axis=0`) for each quarter using `np.sum(sales, axis=0)`.
+6. **Compute Overall Statistical Metrics**:
+   * Calculate the overall mean sales across all entries using `np.mean(sales)`.
+   * Identify the maximum sales figure using `np.max(sales)`.
+   * Identify the minimum sales figure using `np.min(sales)`.
+7. **Display Analysis Summary**: Print the original sales matrix, product-wise totals, quarter-wise totals, overall average, highest sale, and lowest sale.
+8. **Stop** the program.
 ## Program
-## Input 
+## Input 1
 ```
-# Employee Payroll Calculation
+import numpy as np
+import pandas as pd
 
-# Get employee details
-name = input("Enter Employee Name: ")
+# Step 1: Create 2D array (Rows = Products, Columns = Quarters)
+sales = np.array([
+    [1000, 1200, 1150, 1400],
+    [800, 950, 1050, 1300],
+    [1500, 1600, 1550, 1700]
+])
 
-emp_id = input("Enter Employee ID: ")
-
-basic = float(input("Enter Basic Pay: "))
-
-# Calculate allowances
-hra = 0.15 * basic
-
-da = 0.10 * basic
-
-# Calculate gross salary
-gross = basic + hra + da
-
-# Calculate tax
-tax = 0.08 * gross
-
-# Calculate net salary
-net = gross - tax
-
-# Display employee salary report
-print("\n--- Employee Salary Report ---")
-
-print(f"Employee Name: {name}")
-
-print(f"Employee ID: {emp_id}")
-
-print(f"Basic Pay: {basic}")
-
-print(f"HRA: {hra}")
-
-print(f"DA: {da}")
-
-print(f"Gross Salary: {gross}")
-
-print(f"Tax Deducted: {tax}")
-
-print(f"Net Salary: {net}")
+print("Sales Data (Rows=Products, Columns=Quarters):\n", sales)
 ```
-
-## Output
+## Output 1
 ```
-Enter Employee Name: Santhosh M
-Enter Employee ID: 212225410118
-Enter Basic Pay: 200000
+Sales Data (Rows=Products, Columns=Quarters):
+ [[1000 1200 1150 1400]
+ [ 800  950 1050 1300]
+ [1500 1600 1550 1700]]
 
---- Employee Salary Report ---
-Employee Name: Nagaraj S
-Employee ID: 212225410118
-Basic Pay: 200000.0
-HRA: 15000.0
-DA: 10000.0
-Gross Salary: 225000.0
-Tax Deducted: 10000.0
-Net Salary: 215000.0
+```
+## Input 2
+```
+# Step 2: Calculate Aggregations and Summary Statistics
+product_total = np.sum(sales, axis=1)
+quarter_total = np.sum(sales, axis=0)
+overall_avg = np.mean(sales)
+highest_sale = np.max(sales)
+lowest_sale = np.min(sales)
+
+# Step 3: Display Summary
+print("\nTotal Sales per Product:", product_total)
+print("Total Sales per Quarter:", quarter_total)
+print(f"Overall Average Sales: {overall_avg:.2f}")
+print("Highest Sale:", highest_sale)
+print("Lowest Sale:", lowest_sale)
+```
+## Output 2
+```
+Total Sales per Product: [4750 4100 6350]
+Total Sales per Quarter: [3300 3750 3750 4400]
+Overall Average Sales: 1266.67
+Highest Sale: 1700
+Lowest Sale: 800
 ```
 
 ## Result
 
-The program successfully accepts and validates employee details, calculates allowances and deductions, and displays a well-formatted salary report.
+The program successfully analyzes quarterly product sales using 2D NumPy arrays and Python statistical aggregation functions.
